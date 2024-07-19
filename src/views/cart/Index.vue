@@ -1,13 +1,41 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
-    <h1>Shopping Cart</h1>
+    <div id="page-wrap">
+      <h1>Shopping Cart</h1>
+      <div
+       class="product-container"
+        v-for="item in cartItems"
+        :key="item.id"
+       >
+        <img :src="item.imageUrl" alt="" class="product-image">
+        <div class="details-wrap">
+          <h3>{{ item.name }}</h3>
+          <p>Rp{{ item.price }}</p>
+        </div>
+        <button class="remove-button">Remove</button>
+      </div>
+      <h3 id="total-price">Total: Rp{{ totalPrice }}</h3>
+      <button id="checkout-button">Checkout</button>
+    </div>
   </div>
 </template>
 
 <script>
+import { cartItems } from '../../data-seed';
 export default {
-
+  data() {
+    return {
+      cartItems
+    }
+  },
+  computed: {
+    totalPrice() {
+      return this.cartItems.reduce((sum, item) => {
+        return sum + Number(item.price);
+      }, 0);
+    }
+  }
 }
 </script>
 
