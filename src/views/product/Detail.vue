@@ -1,13 +1,41 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div>
-        <h1>Detail Product</h1>
+        <div id="page-wrap">
+          <div id="img-wrap">
+            <img :src="product.imageUrl" alt="">
+          </div>
+          <div id="product-details">
+            <h1>{{ product.name }}</h1>
+            <h3 id="price">Rp{{ product.price }}</h3>
+            <p>Average Rating: {{ product.averageRating }}</p>
+            <button id="add-to-cart">Add to Cart</button>
+            <p>{{ product.description }}</p>
+          </div>
+        </div>
     </div>
 </template>
 
 <script>
-export default {
+import { products } from '../../data-seed'
 
+export default {
+  data() {
+    return {
+      products
+    }
+  },
+  // menggunakan compute untuk mengambil data spesifik dari products
+  computed: {
+    product() {
+      return this.products.find(p => {
+        return p.id === this.$route.params.id;
+      })
+    }
+  },
+  mounted() {
+    console.log(this.product);
+  }
 }
 </script>
 
