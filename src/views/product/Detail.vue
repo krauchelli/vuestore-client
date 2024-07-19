@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div>
-        <div id="page-wrap" v-if="product">
+        <div id="page-wrap" v-if="product"> <!-- menampilkan data product jika ada dengan cara v-if dan v-else -->
           <div id="img-wrap">
             <img :src="product.imageUrl" alt="">
           </div>
@@ -13,7 +13,7 @@
             <p>{{ product.description }}</p>
           </div>
         </div>
-        
+
         <NotFound v-else />
     </div>
 </template>
