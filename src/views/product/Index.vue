@@ -7,7 +7,7 @@
               v-for="product in products"
               :key="product.id" 
 
-              :product="product"
+              :productProp="product"
             /> <!-- menampilkan product item, menggunakan konsep component dan prop
               'product' pada :produt adalah prop yang nanti akan di passing ke ProductItem.vue,
               sedangkan nilai dari product adalah product yang di loop dari 'products' -->

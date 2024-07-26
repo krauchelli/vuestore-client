@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
     <div class="product-item">
-        <img :src="product.imageUrl" alt="">
-        <h3 class="product-name">{{ product.name }}</h3>
-        <p class="product-price">Rp{{ product.price }}</p>
-        <router-link :to="{ name: 'product-detail', params: {id: product.id}}">
+        <img :src="productProp.imageUrl" alt="">
+        <h3 class="product-name">{{ productProp.name }}</h3>
+        <p class="product-price">Rp{{ productProp.price }}</p>
+        <router-link :to="{ name: 'product-detail', params: {id: productProp.id}}">
             <button>Detail</button>
         </router-link> | 
     </div>
@@ -13,7 +13,7 @@
 <script>
 export default {
     props: [
-        'product'
+        'productProp'
     ]
 }
 </script>
