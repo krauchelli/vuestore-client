@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
     <div class="product-item">
-        <img :src="productProp.imageUrl" alt="">
+        <img :src="`http://localhost:8000${productProp.imageUrl}`" alt="">
         <h3 class="product-name">{{ productProp.name }}</h3>
         <p class="product-price">Rp{{ productProp.price }}</p>
         <router-link :to="{ name: 'product-detail', params: {id: productProp.id}}">
