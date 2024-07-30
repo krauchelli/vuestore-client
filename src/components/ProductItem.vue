@@ -4,7 +4,7 @@
         <img :src="`http://localhost:8000${productProp.imageUrl}`" alt="">
         <h3 class="product-name">{{ productProp.name }}</h3>
         <p class="product-price">Rp{{ productProp.price }}</p>
-        <router-link :to="{ name: 'product-detail', params: {id: productProp.id}}">
+        <router-link :to="{ name: 'product-detail', params: {id: productProp.code}}">
             <button>Detail</button>
         </router-link> | 
     </div>
