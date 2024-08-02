@@ -7,7 +7,8 @@
         v-for="item in cartItems"
         :key="item.id"
         :item="item"
-      />
+        v-on:remove-item="removeFromCart($event)"
+      /> <!-- $event akan menangkap nilai dari child component (ItemCart.vue) dengan variabel $emit, parameter kedua sebagai argumen nya, yaitu item.code -->
       <h3 id="total-price">Total: Rp{{ totalPrice }}</h3>
       <button id="checkout-button">Checkout</button>
     </div>
@@ -26,6 +27,12 @@ export default {
   data() {
     return {
       cartItems: []
+    }
+  },
+  methods: {
+    async removeFromCart(code) {
+      await axios.delete(`http://localhost:8000/api/orders/user/1/remove-from-cart/${code}`);
+      this.cartItems = this.cartItems.filter(item => item.code !== code); // menghapus item dari cartItems berdasarkan code setelah proses delete
     }
   },
   computed: {
