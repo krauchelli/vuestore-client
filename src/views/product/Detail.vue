@@ -2,6 +2,7 @@
 <template>
     <div>
         <div id="page-wrap" v-if="product"> <!-- menampilkan data product jika ada dengan cara v-if dan v-else -->
+          <h4 v-if="notif" class="notif">Item added successfully</h4>
           <div id="img-wrap">
             <img :src="`http://localhost:8000${product[0].imageUrl}`" alt="">
           </div>
@@ -9,7 +10,7 @@
             <h1>{{ product[0].name }}</h1>
             <h3 id="price">Rp{{ product[0].price }}</h3>
             <p>Average Rating: {{ product[0].averageRating }}</p>
-            <button id="add-to-cart">Add to Cart</button>
+            <button id="add-to-cart" @click="addToCart(product[0].code)" >Add to Cart</button>
             <p>{{ product[0].description }}</p>
           </div>
         </div>
@@ -30,7 +31,18 @@ export default {
   },
   data() {
     return {
-      product: []
+      product: [],
+      notif: false
+    }
+  },
+  // method untuk menambahkan barang ke cart
+  methods: {
+    async addToCart(product) {
+      console.log(product);
+      await axios.post('http://localhost:8000/api/orders/user/1/add-to-cart', {
+        productCode: product
+      });
+      this.notif = true;
     }
   },
   async created() {
@@ -79,4 +91,11 @@ export default {
     right: 16px;
   }
 
+  .notif {
+    background-color: #41B883;
+    color: white;
+    padding: 3%;
+    border-radius: 8px;
+    text-align: center;
+  }
 </style>
