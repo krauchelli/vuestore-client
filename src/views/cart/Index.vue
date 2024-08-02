@@ -15,7 +15,8 @@
 </template>
 
 <script>
-import { cartItems } from '../../data-seed';
+import axios from 'axios';
+//import { cartItems } from '../../data-seed';
 import ItemCart from '../../components/ItemCart.vue';
 
 export default {
@@ -24,7 +25,7 @@ export default {
   },
   data() {
     return {
-      cartItems
+      cartItems: []
     }
   },
   computed: {
@@ -33,6 +34,21 @@ export default {
         return sum + Number(item.price);
       }, 0);
     }
+  },
+  async created() {
+    const result = await axios.get('http://localhost:8000/api/orders/user/1');
+    // logika untuk mengambil data cart_items dari result.data
+    // cara kerja Object.assign adalah menggabungkan semua object yang ada di dalam array menjadi satu object dari method map yang dijalankan
+    // kemudian hasil dari Object.assign akan di assign ke dalam data cartItems
+    let data = Object.assign({},
+      ...(result.data.map(
+        item => ({
+          cart_items: item.products
+        })
+      ))
+    );
+    this.cartItems = data.cart_items;
+    console.log(`hasil dari cart: ${this.cartItems}`);
   }
 }
 </script>
